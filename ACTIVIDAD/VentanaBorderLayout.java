@@ -1,69 +1,58 @@
 package ACTIVIDAD;
-import javax.swing.*;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.*;
+import java.net.URL; 
+
 public class VentanaBorderLayout extends JFrame {
 
-    private JLabel barraEstado; 
-    private JPanel panelCuadricula; 
+    private JLabel norte;
+    private JLabel sur;
+    private JLabel este;
+    private JLabel oeste;
+    private JLabel centro;
+    private JButton sur1;
 
-    public VentanaBorderLayout() {
-        super("GridLayout Conteo de Clics");
+    public VentanaBorderLayout(){
+        super("Una ventana con BorderLayout :)"); 
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(1200, 1200);
 
-        setLayout(new BorderLayout(10, 10));
+        sur1 = new JButton("Boton sur :V");
+        norte = new JLabel();
+        sur = new JLabel(); 
+        este = new JLabel("Etiqueta en el este");
+        oeste = new JLabel("Etiqueta en el oeste");
+        centro = new JLabel();
 
-        barraEstado = new JLabel("Haga clic en un botón");
-        barraEstado.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        add(barraEstado, BorderLayout.SOUTH); // 
+        URL imgUrl = getClass().getResource("NOSE.jpg");
+        ImageIcon nc = null;
 
-        panelCuadricula = new JPanel();
-        panelCuadricula.setLayout(new GridLayout(3, 2, 10, 10));
-
-        ManejadorClicBotones manejador = new ManejadorClicBotones();
-
-        for (int i = 0; i < 6; i++) {
-            JButton boton = new JButton(String.valueOf(i + 1));
-            boton.setFont(new Font("Serif", Font.BOLD, 100));
-            boton.setPreferredSize(new Dimension(200, 150));
-            
-            boton.addMouseListener(manejador);
-            panelCuadricula.add(boton); 
+        if (imgUrl != null) {
+            nc = new ImageIcon(imgUrl);
+        } else {
+            System.err.println("Error: No se pudo encontrar el archivo 'NOSE.jpg'");
+            centro.setText("Error al cargar GIF"); 
         }
+        centro.setIcon(nc);
+        centro.setHorizontalAlignment(SwingConstants.CENTER);
+        centro.setVerticalAlignment(SwingConstants.CENTER);
+        norte.setText("Etiqueta arribaaaa");
+        sur.setText("Etiqueta abajoooooo");
+        este.setText("Etiqueta esteee");
+        oeste.setText("Etiqueta oesteee");
 
-        add(panelCuadricula, BorderLayout.CENTER);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
+        add(norte, BorderLayout.NORTH);
+        add(sur1, BorderLayout.SOUTH);
+        add(este, BorderLayout.EAST);
+        add(oeste, BorderLayout.WEST);
+        add(centro, BorderLayout.CENTER);
+        
         setVisible(true);
     }
 
-    private class ManejadorClicBotones extends MouseAdapter {
-        
-        @Override
-        public void mouseClicked(MouseEvent evento) {
-            int clickCount = evento.getClickCount();
-            
-            JButton botonClickeado = (JButton) evento.getSource();
-            String numeroBoton = botonClickeado.getText();
-
-            String verbo = (clickCount == 1) ? "vez" : "veces";
-            
-            String detalles = String.format("Se hizo clic %d %s en el botón número %s",
-                                            clickCount,
-                                            verbo,
-                                            numeroBoton);
-            
-            // 
-            barraEstado.setText(detalles);
-        }
-    }
-
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new VentanaBorderLayout());
+        SwingUtilities.invokeLater(() -> {
+            new VentanaBorderLayout(); 
+        });
     }
 }
