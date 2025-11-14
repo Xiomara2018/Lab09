@@ -1,18 +1,28 @@
 package ACTIVIDAD;
 
 import javax.swing.*;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 public class VentanaGridLayout extends JFrame {
+
+    private JLabel barraEstado; 
+    private JPanel panelCuadricula; 
 
     public VentanaGridLayout() {
         super("GridLayout Conteo de Clics");
 
-        setLayout(new GridLayout(3, 2, 10, 10));
+        setLayout(new BorderLayout(10, 10));
+
+        barraEstado = new JLabel("Haga clic en un botón");
+        barraEstado.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        add(barraEstado, BorderLayout.SOUTH); // 
+
+        panelCuadricula = new JPanel();
+        panelCuadricula.setLayout(new GridLayout(3, 2, 10, 10));
 
         ManejadorClicBotones manejador = new ManejadorClicBotones();
 
@@ -20,11 +30,12 @@ public class VentanaGridLayout extends JFrame {
             JButton boton = new JButton(String.valueOf(i + 1));
             boton.setFont(new Font("Serif", Font.BOLD, 100));
             boton.setPreferredSize(new Dimension(200, 150));
-
+            
             boton.addMouseListener(manejador);
-
-            add(boton);
+            panelCuadricula.add(boton); 
         }
+
+        add(panelCuadricula, BorderLayout.CENTER);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -48,10 +59,8 @@ public class VentanaGridLayout extends JFrame {
                                             verbo,
                                             numeroBoton);
             
-            JOptionPane.showMessageDialog(null,
-                                      detalles, 
-                                      "Clics y botones del raton",
-                                      JOptionPane.INFORMATION_MESSAGE);
+            // 
+            barraEstado.setText(detalles);
         }
     }
 
