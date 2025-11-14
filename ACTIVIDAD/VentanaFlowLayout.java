@@ -23,14 +23,14 @@ public class VentanaFlowLayout extends JFrame implements ActionListener {
     private int indiceImagenActual = 0;
 
     public VentanaFlowLayout() {
-        super("Galería con FlowLayout");
+        super("Gif con FlowLayout");
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         rutasImagenes = new ArrayList<>();
 
         rutasImagenes = new ArrayList<>();
-        rutasImagenes.add("cat.gif");
+        rutasImagenes.add( "cat.gif");
         if (rutasImagenes.isEmpty()) {
             throw new IllegalArgumentException("Debe haber al menos una imagen en la lista.");
         }
@@ -63,12 +63,11 @@ public class VentanaFlowLayout extends JFrame implements ActionListener {
     private void mostrarImagenActual() {
         if (!rutasImagenes.isEmpty()) {
             String ruta = rutasImagenes.get(indiceImagenActual);
-            ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(ruta));
+            ImageIcon icon = new ImageIcon(getClass().getResource(ruta));
             lblImagen.setIcon(icon);
             pack(); 
         }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAnterior) {
