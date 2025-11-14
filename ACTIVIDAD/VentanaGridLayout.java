@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 public class VentanaGridLayout extends JFrame {
 
     public VentanaGridLayout() {
-        super("GridLayout (3x2) - Conteo de Clics");
+        super("GridLayout - Conteo de Clics");
 
         setLayout(new GridLayout(3, 2, 10, 10));
 
