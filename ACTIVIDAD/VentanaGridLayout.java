@@ -68,3 +68,4 @@ public class VentanaGridLayout extends JFrame {
         SwingUtilities.invokeLater(() -> new VentanaGridLayout());
     }
 }
+
